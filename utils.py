@@ -1,3 +1,6 @@
+import work_with_data
+
+
 def add_new_employee():
     data = {}
     while True:
@@ -43,5 +46,10 @@ def add_new_employee():
         except ValueError:
             print('The last name must be a string!')
 
-    return data
+    choose = input("Save the new employee? (y/n): ")
+    if choose == 'y':
+        work_with_data.save_new_employee(data=data)
+
+
+
 

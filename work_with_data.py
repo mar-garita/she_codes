@@ -7,7 +7,6 @@ FILE_NAME = 'data/employees.csv'
 
 def save_new_employee(data):
     if os.path.exists('data/employees.csv'):
-        print('IF')
         with open('data/employees.csv', 'a') as f:
             writer = csv.DictWriter(
                 f,
@@ -17,7 +16,6 @@ def save_new_employee(data):
             writer.writerow(data)
 
     else:
-        print('ELSE')
         with open('data/employees.csv', 'w') as f:
             writer = csv.DictWriter(
                 f,
@@ -28,6 +26,17 @@ def save_new_employee(data):
             writer.writerow(data)
 
 
+def delete_employee():
+    with open('data/employees.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        while True:
+            id = input('Please enter the employee ID number: ')
+            for row in reader:
+                if row['id'] == id:
+                    input('Delete an employee of {} {}? (y/n) '.format(row['first_name'], row['last_name']))
+            break
+                # else:
+                #     print('else')
 
 
 
