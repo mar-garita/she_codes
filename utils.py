@@ -48,7 +48,7 @@ def add_new_employee():
 
     choose = input("Save the new employee? (y/n): ")
     if choose == 'y':
-        work_with_data.save_new_employee(data=data)
+        work_with_data.save_employee(data=data)
 
 
 

@@ -3,15 +3,16 @@ import os
 
 
 FILE_NAME = 'data/employees.csv'
+quoting = csv.QUOTE_MINIMAL
 
 
-def save_new_employee(data):
+def save_employee(data):
     if os.path.exists('data/employees.csv'):
         with open('data/employees.csv', 'a') as f:
             writer = csv.DictWriter(
                 f,
                 fieldnames=['id', 'first_name', 'last_name', 'age', 'phone'],
-                quoting=csv.QUOTE_MINIMAL
+                quoting=quoting,
             )
             writer.writerow(data)
 
@@ -20,27 +21,43 @@ def save_new_employee(data):
             writer = csv.DictWriter(
                 f,
                 fieldnames=['id', 'first_name', 'last_name', 'age', 'phone'],
-                quoting=csv.QUOTE_MINIMAL
+                quoting=quoting
             )
             writer.writeheader()
             writer.writerow(data)
 
 
+# def make_list_data():
+#     id = input('Please enter the employee ID number: ')
+#     with open('data/employees.csv', 'r') as f:
+#         reader = csv.DictReader(f)
+#         data = []
+#         for row in reader:
+#             if row.get('id') != id:
+#                 data.append(row)
+#
+#     return data
+
+
 def delete_employee():
+    id = input('Please enter the employee ID number: ')
+
     with open('data/employees.csv', 'r') as f:
         reader = csv.DictReader(f)
-        while True:
-            id = input('Please enter the employee ID number: ')
-            for row in reader:
-                if row['id'] == id:
-                    input('Delete an employee of {} {}? (y/n) '.format(row['first_name'], row['last_name']))
-            break
-                # else:
-                #     print('else')
+        data = []
+        for row in reader:
+            if row.get('id') != id:
+                data.append(row)
 
-
-
-
+    with open('data/employees.csv', 'w') as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=['id', 'first_name', 'last_name', 'age', 'phone'],
+            quoting=quoting
+        )
+        writer.writeheader()
+        for employee in data:
+            writer.writerow(employee)
 
 
 
