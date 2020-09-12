@@ -1,12 +1,13 @@
 import utils
-import work_with_data
+from add_employee_manually import add_new_employee
+from delete_employee_manually import delete_employee
+from mark_attendance import mark_employee_enter
 
 
 def main():
-    # data = utils.add_new_employee()
-    # print(data)
-    # func = work_with_data.make_list_data()
-    work_with_data.delete_employee()
+    add_new_employee()
+    delete_employee()
+    mark_employee_enter()
 
 
 if __name__ == '__main__':
