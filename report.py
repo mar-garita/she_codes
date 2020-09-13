@@ -1,8 +1,33 @@
 import csv
 import datetime
 
+from utils import check_id
+
 
 FILE_NAME = 'data/entry_time.csv'
+
+
+def get_attendance_report():
+    id = check_id()
+    with open(FILE_NAME, 'r') as f:
+        reader = csv.DictReader(f)
+        data = []
+        for row in reader:
+            if row.get('id') == id:
+                data.append(row)
+    for i in data:
+        print('ID: {}, DATE: {}, TIME: {}'.format(i.get('id'), i.get('date'), i.get('time')))
+
+
+def get_monthly_report():
+    month = int(input('Please, enter the month number: '))
+    with open(FILE_NAME, 'r') as f:
+        reader = csv.DictReader(f)
+        data = []
+        for row in reader:
+            m = int(row.get('date').split('/')[1])
+            if m == month:
+                print('ID: {}, DATE: {}, TIME: {}'.format(row.get('id'), row.get('date'), row.get('time')))
 
 
 def get_late_employees():
@@ -31,6 +56,3 @@ def get_late_employees():
             h = str(row['time'][0])
             m = str(row['time'][1])
             print('ID: {}, DATE: {}, TIME: {}:{}'.format(row.get('id'), row.get('date'), h, m))
-
-
-

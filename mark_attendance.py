@@ -29,12 +29,13 @@ def save_time_entry(data):
             writer.writerow(data)
 
 
-def mark_employee_enter():
+def mark_employee_entry():
     data = {'id': check_id()}
-    d = datetime.datetime.now().strftime("%d/%m/%Y %H:%M").split(' ')
-    data['date'] = d[0]
-    data['time'] = d[1]
+    time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M").split(' ')
+    data['date'] = time[0]
+    data['time'] = time[1]
     save_time_entry(data)
+    print(time[1])
     print('DONE!')
 
 
